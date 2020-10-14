@@ -1,5 +1,6 @@
-package com.arraylists;
+package com.arraylists.grocerylist;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -56,33 +57,47 @@ public class Main {
 	}
 
 	public static void addItem() {
+		
 		System.out.print("Please enter the grocery item : ");
 		groceryList.addGroceryItem(scanner.nextLine());
 	}
 
 	public static void modifyItem() {
-		System.out.print("Enter item number :");
-		int itemNumber=scanner.nextInt();
-		scanner.nextLine();
+		System.out.print("Enter item to be replaced :");
+		String replacementItem=scanner.nextLine();
 		System.out.print("Enter the replacement item :");
 		String newItem=scanner.nextLine();
-		groceryList.modifyGroceryItem(itemNumber-1, newItem);
+		groceryList.modifyGroceryItem(replacementItem,newItem);
 	}
 	public static void removeItem(){
-		System.out.print("Enter item number :");
-		int itemNumber=scanner.nextInt();
-		scanner.nextLine();
-		groceryList.removeGroceryItem(itemNumber-1);
+		System.out.print("Enter item to remove :");
+		String item=scanner.nextLine();
+		groceryList.removeGroceryItem(item);
 	}
 	public static void searchForItem(){
 		System.out.print("Enter the item to search for :");
 		String searchItem=scanner.nextLine();
-		if(groceryList.findItem(searchItem)!=null){
+		if(groceryList.findItem(searchItem)>=0){
 			System.out.print("Search item " + searchItem + " is found");
 		}else
 		{
 			System.out.print("Search item " + searchItem + " is not in the shopping list");
 		}
+	}
+	
+	public static void processArrayList(){
+		
+		//one way to copy array list
+		ArrayList<String> newArray = new ArrayList<String>();
+		newArray.addAll(groceryList.getGroceryList());
+		
+		//another way to copy array list
+	
+		ArrayList<String> nextArray= new ArrayList<String>(groceryList.getGroceryList());
+	
+		//one more way to copy array list
+		String[] altArray = new String[groceryList.getGroceryList().size()];
+		altArray= (String[]) groceryList.getGroceryList().toArray();
 	}
 }
 
